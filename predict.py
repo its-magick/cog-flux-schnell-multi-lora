@@ -16,7 +16,7 @@ from diffusers.pipelines.stable_diffusion.safety_checker import (
     StableDiffusionSafetyChecker
 )
 
-MODEL_CACHE = "checkpoints"
+MODEL_CACHE = "FLUX.1-schnell"
 MODEL_URL = "https://weights.replicate.delivery/default/black-forest-labs/FLUX.1-schnell/files.tar"
 SAFETY_CACHE = "safety-cache"
 FEATURE_EXTRACTOR = "/src/feature-extractor"
@@ -36,14 +36,11 @@ ASPECT_RATIOS = {
     "9:21": (640, 1536),
 }
 
-def download_weights(url, dest, file=False):
+def download_weights(url, dest):
     start = time.time()
     print("downloading url: ", url)
     print("downloading to: ", dest)
-    if not file:
-        subprocess.check_call(["pget", "-x", url, dest], close_fds=False)
-    else:
-        subprocess.check_call(["pget", url, dest], close_fds=False)
+    subprocess.check_call(["pget", "-xf", url, dest], close_fds=False)
     print("downloading took: ", time.time() - start)
 
 class Predictor(BasePredictor):
