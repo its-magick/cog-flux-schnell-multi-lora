@@ -40,7 +40,7 @@ def download_weights(url, dest):
     start = time.time()
     print("downloading url: ", url)
     print("downloading to: ", dest)
-    subprocess.check_call(["pget", "-xf", url], close_fds=False)
+    subprocess.check_call(["pget", "-xf", url, dest], close_fds=False)
     print("downloading took: ", time.time() - start)
 
 class Predictor(BasePredictor):
