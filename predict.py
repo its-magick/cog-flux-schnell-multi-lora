@@ -16,7 +16,7 @@ from diffusers.pipelines.stable_diffusion.safety_checker import (
     StableDiffusionSafetyChecker
 )
 
-MODEL_CACHE = "FLUX.1-schnell"
+MODEL_CACHE = "FLUX.1-schnell-cache"
 MODEL_URL = "https://weights.replicate.delivery/default/black-forest-labs/FLUX.1-schnell/files.tar"
 SAFETY_CACHE = "safety-cache"
 FEATURE_EXTRACTOR = "/src/feature-extractor"
@@ -64,7 +64,7 @@ class Predictor(BasePredictor):
         if not os.path.exists(MODEL_CACHE):
             download_weights(MODEL_URL, MODEL_CACHE)
         self.txt2img_pipe = FluxPipeline.from_pretrained(
-            "FLUX.1-schnell",
+            MODEL_CACHE,
             torch_dtype=torch.bfloat16,
             cache_dir=MODEL_CACHE
         ).to("cuda")
