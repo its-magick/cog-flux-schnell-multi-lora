@@ -66,7 +66,7 @@ class Predictor(BasePredictor):
         self.txt2img_pipe = FluxPipeline.from_pretrained(
             MODEL_CACHE,
             torch_dtype=torch.bfloat16,
-            cache_dir=MODEL_CACHE + "-cache"
+            cache_dir=MODEL_CACHE
         ).to("cuda")
 
         # Save some VRAM by offloading the model to CPU
